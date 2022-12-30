@@ -8,6 +8,7 @@
 
 - 禁止 root
 - 禁止读写 /mnt 下的文件
+- 和其他进程隔离
 - 给 QQ 使用单独的临时目录（/tmp）
 - 给 QQ 使用临时家目录，且只把如下的位置挂载到临时家目录
   - `~/.config/pulse`
@@ -34,4 +35,4 @@ firejail --profile=qq.profile <qq 可执行文件>
 firejail --profile=qq-firejail/qq.profile tencent-qq
 ```
 
-你也可以
+你也可以自定义 desktop 文件，本仓库附带了一个模板 [`qq.desktop`](qq.desktop)。

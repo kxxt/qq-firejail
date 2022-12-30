@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=Network;
+Comment[en_US]=QQ
+Comment=QQ
+Exec=firejail --profile=到qq.profile的路径 tencent-qq
+GenericName[en_US]=
+GenericName=
+Icon=qq
+MimeType=
+Name[en_US]=QQ
+Name=QQ
+Path=
+StartupNotify=true
+StartupWMClass=QQ
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
