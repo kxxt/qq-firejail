@@ -7,8 +7,9 @@ include disable-shell.inc
 
 caps.drop all
 ignore apparmor
-nonewprivs
 noprinters
+
+nonewprivs
 noroot
 notv
 nou2f
