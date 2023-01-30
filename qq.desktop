@@ -2,7 +2,7 @@
 Categories=Network;
 Comment[en_US]=QQ
 Comment=QQ
-Exec=firejail --profile=到qq.profile的路径 tencent-qq
+Exec=firejail --profile=到qq.profile的路径 linuxqq
 GenericName[en_US]=
 GenericName=
 Icon=qq

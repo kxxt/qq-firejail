@@ -28,11 +28,11 @@
 firejail --profile=qq.profile <qq 可执行文件>
 ```
 
-比如，在 Archlinux 下，如果你安装了 aur 的 linuxqq-new,
+比如，在 Archlinux 下，如果你安装了 aur 的 linuxqq,
 你可以运行下面的命令：
 
 ```bash
-firejail --profile=qq-firejail/qq.profile tencent-qq
+firejail --profile=qq-firejail/qq.profile linuxqq
 ```
 
 你也可以自定义 desktop 文件，本仓库附带了一个模板 [`qq.desktop`](qq.desktop)。
