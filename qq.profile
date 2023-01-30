@@ -3,7 +3,7 @@
 
 ##quiet
 # Persistent local customizations
-include PROFILE.local
+include linuxqq.local
 # Persistent global definitions
 include globals.local
 
@@ -90,94 +90,61 @@ include disable-write-mnt.inc
 ##allusers
 #apparmor
 caps.drop all
-##caps.keep CAPS
-##hostname NAME
-# CLI only
-##ipc-namespace
-# breaks audio and sometimes dbus related functions
-#machine-id
-# 'net none' or 'netfilter'
-#net none
-#netfilter
-#no3d
-##nodbus (deprecated, use 'dbus-user none' and 'dbus-system none', see below)
-#nodvd
-#nogroups
-#noinput
+ignore apparmor
 nonewprivs
-#noprinters
+noprinters
 noroot
-#nosound
 notv
 nou2f
-#novideo
-# Remove each unneeded protocol:
-#  - unix is usually needed
-#  - inet,inet6 only if internet access is required (see 'net none'/'netfilter' above)
-#  - netlink is rarely needed
-#  - packet and bluetooth almost never
 protocol unix,inet,inet6,netlink
-#,packet,bluetooth
 seccomp !chroot
-##seccomp !chroot
-##seccomp.drop SYSCALLS (see syscalls.txt)
-#seccomp.block-secondary
-##seccomp-error-action log (only for debugging seccomp issues)
-#shell none
-#tracelog
-# Prefer 'x11 none' instead of 'disable-X11.inc' if 'net none' is set
-##x11 none
 
 disable-mnt
-##private
-# It's common practice to refer to the python executable(s) in private-bin with `python*`, which covers both v2 and v3
-#private-bin PROGRAMS
-#private-cache
-#private-dev
-#private-etc FILES
-# private-etc templates (see also #1734, #2093)
-#  Common: alternatives,ld.so.cache,ld.so.conf,ld.so.conf.d,ld.so.preload,locale,locale.alias,locale.conf,localtime,mime.types,xdg
-#    Extra: group,magic,magic.mgc,passwd
-#  3D: bumblebee,drirc,glvnd,nvidia
-#  Audio: alsa,asound.conf,machine-id,pulse
-#  D-Bus: dbus-1,machine-id
-#  GUI: fonts,pango,X11
-#  GTK: dconf,gconf,gtk-2.0,gtk-3.0
-#  KDE: kde4rc,kde5rc
-#  Networking: ca-certificates,crypto-policies,host.conf,hostname,hosts,nsswitch.conf,pki,protocols,resolv.conf,rpc,services,ssl
-#    Extra: gai.conf,proxychains.conf
-#  Qt: Trolltech.conf
-##private-lib LIBS
-##private-opt NAME
-private-tmp
-##writable-etc
-##writable-run-user
-##writable-var
-##writable-var-log
-#private-bin PROGRAMS
-#private-cache
-#private-dev
-#private-etc FILES
 
-whitelist ${HOME}/.config/pulse
+private-opt QQ
+private-tmp
+private-etc alsa,alternatives,ca-certificates,crypto-policies,fonts,group,host.conf,hostname,hosts,ld.so.cache,ld.so.preload,localtime,login.defs,machine-id,nsswitch.conf,os-release,passwd,pki,pulse,resolv.conf,ssl,xdg
+
+
+noblacklist ${HOME}/.config/QQ
+mkdir ${HOME}/.config/QQ
 whitelist ${HOME}/.config/QQ
+
 whitelist ${HOME}/Pictures
 whitelist ${HOME}/Downloads
-# private-etc templates (see alation needs access to you can
-# check with flatpak (when the application is distributed that way):
-#    flatpak remote-info --show-metadata flathub <APP-ID>
-# Notes:
-#  - flatpak implicitly allows an app to own <APP-ID> on the session bus
-#  - Some features like native notifications are implemented as portal too.
-#  - In order to make dconf work (when used by the app) you need to allow
-#    'ca.desrt.dconf' even when not allowed by flatpak.
-# Notes and policies about addresses can be found at
-# <https://github.com/netblue30/firejail/wiki/Restrict-D-Bus>
-#dbus-user filter
-#dbus-user.own com.github.netblue30.firejail
-#dbus-user.talk ca.desrt.dconf
-#dbus-user.talk org.freedesktop.Notifications
-#dbus-system none
+
+whitelist ${HOME}/.config/pulse
+
+whitelist ${HOME}/.config/fontconfig
+read-only  ${HOME}/.config/fontconfig
+
+whitelist ${HOME}/.fonts.conf.d
+read-only ${HOME}/.fonts.conf.d
+
+whitelist ${HOME}/.fonts.conf
+read-only ${HOME}/.fonts.conf
+
+whitelist ${HOME}/.cache/fontconfig
+
+whitelist ${HOME}/.local/share/fonts
+read-only ${HOME}/.local/share/fonts
+
+whitelist ${HOME}/.fonts
+read-only ${HOME}/.fonts
+
+whitelist ${HOME}/.config/QX
+
+dbus-user filter
+dbus-user.talk org.freedesktop.Notifications
+dbus-user.talk org.freedesktop.portal.Desktop
+dbus-user.talk org.freedesktop.portal.Fcitx
+dbus-user.talk org.freedesktop.portal.IBus
+dbus-user.talk org.freedesktop.ScreenSaver
+dbus-user.talk org.gnome.Mutter.IdleMonitor
+?ALLOW_TRAY: dbus-user.talk org.kde.StatusNotifierWatcher
+dbus-user.talk org.mozilla.*
+ignore dbus-user none
+
 
 ##deterministic-shutdown
 ##env VAR=VALUE
@@ -186,3 +153,7 @@ whitelist ${HOME}/Downloads
 ##noexec PATH
 ##read-only ${HOME}
 ##read-write ${HOME}
+
+
+
+include electron.profile
