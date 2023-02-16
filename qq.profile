@@ -1,6 +1,10 @@
 # Firejail profile for qq
 # Description: Firejail profile for qq nt
 
+whitelist ${HOME}/Pictures
+noblacklist ${HOME}/Pictures
+whitelist ${HOME}/Downloads
+
 include linuxqq.local
 include allow-bin-sh.inc
 include disable-shell.inc
@@ -32,8 +36,6 @@ mkdir ${HOME}/.config/tencent-qq
 whitelist ${HOME}/.config/QQ
 whitelist ${HOME}/.config/tencent-qq
 
-whitelist ${HOME}/Pictures
-whitelist ${HOME}/Downloads
 
 whitelist ${HOME}/.config/pulse
 
